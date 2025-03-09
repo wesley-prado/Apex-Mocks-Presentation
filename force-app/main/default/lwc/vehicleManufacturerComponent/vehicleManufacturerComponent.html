@@ -1,0 +1,21 @@
+<template>
+	<!-- show manufacturers data -->
+
+	<lightning-card title="Vehicle Manufacturers" icon-name="custom:custom14">
+		<div class="slds-m-around_medium">
+			<template if:true={manufacturers}>
+				<template for:each={manufacturers} for:item="manufacturer">
+					<div
+						key={manufacturer.id}
+						style="border: 1px solid #ddd; padding: 10px; margin: 10px"
+					>
+						<p>{manufacturer.id}</p>
+						<p>{manufacturer.commonName}</p>
+						<p>{manufacturer.name}</p>
+						<p>{manufacturer.country}</p>
+					</div>
+				</template>
+			</template>
+		</div>
+	</lightning-card>
+</template>

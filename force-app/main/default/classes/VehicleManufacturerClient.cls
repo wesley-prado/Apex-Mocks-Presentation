@@ -3,7 +3,7 @@
  * Utilizado para demonstrar técnicas de mock em testes
  */
 public class VehicleManufacturerClient implements RESTServiceCallable {
-	private static final String ENDPOINT = 'https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers';
+	private static final String ENDPOINT = 'callout:Vechile_Manufacturer_Credentials/getallmanufacturers';
 	private final Map<String, Object> params = new Map<String, Object>();
 
 	/**
@@ -26,24 +26,35 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 		HttpRequest req = new HttpRequest();
 		req.setEndpoint(ENDPOINT);
 		req.setMethod('GET');
+		HttpResponse res;
 
 		// Verifica se o formato foi especificado nos parâmetros e o adiciona à URL
 		if (params.containsKey('format')) {
 			req.setEndpoint(req.getEndpoint() + '?format=' + params.get('format'));
 		}
 
-		// Envia a requisição HTTP e obtém a resposta
-		HttpResponse res = new Http().send(req);
+		try {
+			// Envia a requisição HTTP e obtém a resposta
+			res = new Http().send(req);
+		} catch (CalloutException e) {
+			// Lança uma exceção personalizada em caso de falha na requisição
+			throw new ManufacturerServiceException(
+				'Failed to retrieve manufacturers: ' + e.getMessage()
+			);
+		}
 
 		// Verifica se a resposta foi bem-sucedida (código 200)
 		if (res.getStatusCode() == 200) {
 			return parseResponse(res);
-		} else {
-			// Lança uma exceção caso a requisição falhe
-			throw new ManufacturerServiceException(
-				'Failed to retrieve manufacturers: ' + res.getStatusCode()
-			);
 		}
+
+		// Lança uma exceção caso a requisição falhe
+		throw new ManufacturerServiceException(
+			'Failed to retrieve manufacturers: ' +
+				res.getStatusCode() +
+				' ' +
+				res.getBody()
+		);
 	}
 
 	/**
@@ -113,12 +124,12 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 		// Obtém o corpo da resposta
 		String responseBody = res.getBody();
 		List<ManufacturerData> manufacturers = new List<ManufacturerData>();
-		
+
 		// Desserializa a resposta JSON para um mapa de objetos
 		Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
 			responseBody
 		);
-		
+
 		// Percorre cada resultado e cria um objeto ManufacturerData
 		for (Object result : (List<Object>) response.get('Results')) {
 			Map<String, Object> manufacturer = (Map<String, Object>) result;
@@ -140,9 +151,13 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 	 * @description Classe interna para armazenar os dados de um fabricante
 	 */
 	public class ManufacturerData {
+		@AuraEnabled
 		public Integer id;
+		@AuraEnabled
 		public String country;
+		@AuraEnabled
 		public String name;
+		@AuraEnabled
 		public String commonName;
 
 		/**

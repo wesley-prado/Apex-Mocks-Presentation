@@ -203,7 +203,7 @@ private class VehicleManufacturerClientTest {
 
 		// Configurar resposta para endpoint de fabricantes no formato JSON
 		mock.addResponse(
-			'https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json',
+			'callout:Vechile_Manufacturer_Credentials/getallmanufacturers?format=json',
 			200,
 			'application/json',
 			JSON_RESPONSE
@@ -211,7 +211,7 @@ private class VehicleManufacturerClientTest {
 
 		// Configurar resposta para endpoint de fabricantes no formato XML
 		mock.addResponse(
-			'https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers',
+			'callout:Vechile_Manufacturer_Credentials/getallmanufacturers',
 			200,
 			'application/xml',
 			XML_RESPONSE
@@ -219,7 +219,7 @@ private class VehicleManufacturerClientTest {
 
 		// Configurar resposta para endpoint inválido
 		mock.addResponse(
-			'https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=invalid',
+			'callout:Vechile_Manufacturer_Credentials/getallmanufacturers?format=invalid',
 			500,
 			'application/xml',
 			''

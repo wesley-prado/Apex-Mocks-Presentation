@@ -3,5 +3,21 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/.sfdx": true
+  },
+  "SFDoc.username": "Wesley Prado (wesleyprado.dev@gmail.com)",
+  "workbench.colorCustomizations": {
+    "editor.selectionBackground": "#890d43d1",
+    "editor.selectionHighlightBackground": "#890d43f4",
+    "editor.lineHighlightBackground": "#890d436c",
+    "editor.findMatchBackground": "#890d436c",
+    "minimapSlider.background": "#890d436c",
+    "minimapSlider.activeBackground": "#890d436c",
+    "minimapSlider.hoverBackground": "#890d436c",
+    "minimap.selectionHighlight": "#890d43f4",
+    "minimap.findMatchHighlight": "#890d43f4",
+    "minimap.errorHighlight": "#fd0000",
+    "minimap.warningHighlight": "#f5fd00",
+    "statusBar.background": null,
+    "activityBar.background": null
   }
 }

@@ -1,28 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>*</members>
+		<members>AsyncWwwDataaccessComWebservicesserver</members>
+		<members>ManufacturerDTO</members>
+		<members>NumbersInWordsCallable</members>
+		<members>NumbersInWordsController</members>
+		<members>NumbersInWordsControllerTest</members>
+		<members>RESTServiceCallable</members>
+		<members>SOAPRequestExample</members>
+		<members>SOAPServiceCallable</members>
+		<members>Stub</members>
+		<members>VehicleManufacturerClient</members>
+		<members>VehicleManufacturerClientTest</members>
+		<members>VehicleManufacturerController</members>
+		<members>VehicleManufacturerControllerTest</members>
+		<members>Wsdl2ApexService</members>
+		<members>wwwDataaccessComWebservicesserver</members>
 		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexPage</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTestSuite</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexTrigger</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
 		<members>Vehicle_Manufacturers</members>
@@ -37,7 +31,7 @@
 		<name>NamedCredential</name>
 	</types>
 	<types>
-		<members>*</members>
+		<members>xml_numbers_in_words_response_example</members>
 		<name>StaticResource</name>
 	</types>
 	<version>63.0</version>

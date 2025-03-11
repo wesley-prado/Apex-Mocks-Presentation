@@ -1,18 +1,58 @@
-# Salesforce DX Project: Next Steps
+# Projeto de Demonstração de Mocks e Injeção de Dependência em Salesforce
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+## Visão Geral
 
-## How Do You Plan to Deploy Your Changes?
+Este projeto demonstra técnicas avançadas de testes em Salesforce, com foco em mocks e injeção de dependência. Os exemplos práticos mostram como criar testes unitários para integrações externas e componentes que dependem de chamadas de API.
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+## Conteúdo do Projeto
 
-## Configure Your Salesforce DX Project
+### Interfaces e Classes de Mock
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+O projeto apresenta exemplos e explicações sobre as seguintes interfaces e classes para teste:
 
-## Read All About It
+- **WebServiceMock**: Para simular chamadas a web services SOAP
+- **HttpCalloutMock**: Para simular chamadas HTTP REST
+- **StaticResourceCalloutMock**: Para utilizar recursos estáticos como respostas simuladas
+- **MultiStaticResourceCalloutMock**: Para simular múltiplas chamadas usando diferentes recursos estáticos
+- **StubProvider**: Para criar implementações dinâmicas de interfaces
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+### Componente LWC de Demonstração
+
+Um componente Lightning Web Component que demonstra como testar cenários com Named Credentials:
+
+- Testes com Named Credentials ativados
+- Testes com Named Credentials desativados
+- Estratégias para simular diferentes respostas
+
+## Como Usar Este Projeto
+
+1. Clone este repositório para sua organização Salesforce (via SFDX)
+2. Examine as classes de exemplo na pasta `classes`
+3. Analise os testes correspondentes para ver como implementar mocks
+4. Experimente o componente LWC na pasta `lwc`
+5. Opcionalmente, instale todos os componentes do projeto na ORG para executar os testes
+
+## Benefícios
+
+- Isolamento de testes para integrações externas
+- Aumento da cobertura de código sem dependências externas
+- Testes mais rápidos e determinísticos
+- Padrões para código mais manutenível e testável
+
+## Pré-requisitos
+
+- Conhecimento básico de Apex e testes unitários
+- Familiaridade com LWC (para os exemplos de componentes)
+- Organização Salesforce (Developer Edition, Sandbox ou Scratch Org) para instalar as dependências
+
+## Exemplos Incluídos
+
+- Simulação de respostas SOAP usando WebServiceMock
+- Mock de API REST externa usando HttpCalloutMock
+- Uso de recursos estáticos para simular payloads de resposta
+- Implementação de StubProvider
+- Componente LWC que se adaptam com base na disponibilidade de Named Credentials
+
+## Contribuições
+
+Sinta-se à vontade para contribuir com exemplos adicionais, melhorias ou correções. Abra um Pull Request ou uma Issue para discussão.

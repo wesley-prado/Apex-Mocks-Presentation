@@ -1,7 +1,7 @@
 /**
  * @description       : Classe de teste para a classe VehicleManufacturerClient
  * @author            : Wesley Prado (wesleyprado.dev@gmail.com)
- * @last modified on  : 2025/03/09
+ * @last modified on  : 2025/03/11
  * @last modified by  : Wesley Prado (wesleyprado.dev@gmail.com)
  **/
 
@@ -227,7 +227,6 @@ private class VehicleManufacturerClientTest {
 
 		Test.setMock(HttpCalloutMock.class, mock);
 
-		// Agora você pode testar diferentes chamadas de endpoint com o mesmo mock
 		VehicleManufacturerClient client = new VehicleManufacturerClient();
 
 		// Testar o endpoint JSON

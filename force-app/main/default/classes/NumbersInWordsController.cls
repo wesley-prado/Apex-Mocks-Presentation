@@ -1,21 +1,11 @@
 /**
  * @description       :
  * @author            : Wesley Prado (wesleyprado.dev@gmail.com)
- * @last modified on  : 2025/03/08
+ * @last modified on  : 2025/03/10
  * @last modified by  : Wesley Prado (wesleyprado.dev@gmail.com)
  **/
 public without sharing class NumbersInWordsController {
-	@TestVisible
-	private static NumbersInWordsCallable service1 {
-		get {
-			if (service1 == null) {
-				service1 = new SOAPRequestExample();
-			}
-			return service1;
-		}
-		set;
-	}
-
+	private static NumbersInWordsCallable service1 = new SOAPRequestExample();
 	private static NumbersInWordsCallable service2 = new Wsdl2ApexService();
 
 	@AuraEnabled

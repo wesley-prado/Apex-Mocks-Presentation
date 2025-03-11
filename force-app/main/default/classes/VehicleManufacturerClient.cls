@@ -21,7 +21,7 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 	 * @description Obtém lista de todos os fabricantes de veículos
 	 * @return Lista de fabricantes em formato de wrapper
 	 */
-	public List<ManufacturerData> call() {
+	public List<ManufacturerDTO> call() {
 		// Cria uma nova requisição HTTP
 		HttpRequest req = new HttpRequest();
 		req.setEndpoint(ENDPOINT);
@@ -62,7 +62,7 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 	 * @param res Resposta HTTP recebida da API
 	 * @return Lista de fabricantes processados
 	 */
-	private List<ManufacturerData> parseResponse(HttpResponse res) {
+	private List<ManufacturerDTO> parseResponse(HttpResponse res) {
 		// Obtém o tipo de conteúdo da resposta
 		String contentType = res.getHeader('Content-Type');
 
@@ -84,11 +84,11 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 	 * @param res Resposta HTTP contendo XML
 	 * @return Lista de fabricantes extraídos do XML
 	 */
-	private List<ManufacturerData> parseXML(HttpResponse res) {
+	private List<ManufacturerDTO> parseXML(HttpResponse res) {
 		System.debug(LoggingLevel.INFO, '======= PARSING XML =======');
 
 		// Inicializa a lista de fabricantes
-		List<ManufacturerData> manufacturers = new List<ManufacturerData>();
+		List<ManufacturerDTO> manufacturers = new List<ManufacturerDTO>();
 
 		// Percorre os nós XML que representam os fabricantes
 		for (
@@ -97,9 +97,9 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 				.getChildElement('Results', null)
 				.getChildElements()
 		) {
-			// Cria um objeto ManufacturerData para cada fabricante encontrado no XML
+			// Cria um objeto ManufacturerDTO para cada fabricante encontrado no XML
 			manufacturers.add(
-				new ManufacturerData(
+				new ManufacturerDTO(
 					Integer.valueOf(
 						manufacturer.getChildElement('Mfr_ID', null).getText()
 					),
@@ -118,24 +118,24 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 	 * @param res Resposta HTTP contendo JSON
 	 * @return Lista de fabricantes extraídos do JSON
 	 */
-	private List<ManufacturerData> parseJSON(HttpResponse res) {
+	private List<ManufacturerDTO> parseJSON(HttpResponse res) {
 		System.debug(LoggingLevel.INFO, '======= PARSING JSON =======');
 
 		// Obtém o corpo da resposta
 		String responseBody = res.getBody();
-		List<ManufacturerData> manufacturers = new List<ManufacturerData>();
+		List<ManufacturerDTO> manufacturers = new List<ManufacturerDTO>();
 
 		// Desserializa a resposta JSON para um mapa de objetos
 		Map<String, Object> response = (Map<String, Object>) JSON.deserializeUntyped(
 			responseBody
 		);
 
-		// Percorre cada resultado e cria um objeto ManufacturerData
+		// Percorre cada resultado e cria um objeto ManufacturerDTO
 		for (Object result : (List<Object>) response.get('Results')) {
 			Map<String, Object> manufacturer = (Map<String, Object>) result;
 
 			manufacturers.add(
-				new ManufacturerData(
+				new ManufacturerDTO(
 					(Integer) manufacturer.get('Mfr_ID'),
 					(String) manufacturer.get('Country'),
 					(String) manufacturer.get('Mfr_Name'),
@@ -146,40 +146,6 @@ public class VehicleManufacturerClient implements RESTServiceCallable {
 
 		return manufacturers;
 	}
-
-	/**
-	 * @description Classe interna para armazenar os dados de um fabricante
-	 */
-	public class ManufacturerData {
-		@AuraEnabled
-		public Integer id;
-		@AuraEnabled
-		public String country;
-		@AuraEnabled
-		public String name;
-		@AuraEnabled
-		public String commonName;
-
-		/**
-		 * @description Construtor para criar um objeto de dados do fabricante
-		 * @param id Identificador numérico do fabricante
-		 * @param country País de origem do fabricante
-		 * @param name Nome completo do fabricante
-		 * @param commonName Nome comum ou abreviado do fabricante (opcional)
-		 */
-		public ManufacturerData(
-			Integer id,
-			String country,
-			String name,
-			String commonName
-		) {
-			this.id = id;
-			this.country = country;
-			this.name = name;
-			this.commonName = commonName;
-		}
-	}
-
 	/**
 	 * @description Classe de exceção personalizada para erros relacionados ao serviço de fabricantes
 	 */

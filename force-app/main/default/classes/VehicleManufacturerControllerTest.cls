@@ -1,7 +1,7 @@
 /**
  * @description       : Classe de teste para VehicleManufacturerController
  * @author            : Wesley Prado (wesleyprado.dev@gmail.com)
- * @last modified on  : 2025/03/09
+ * @last modified on  : 2025/03/11
  * @last modified by  : Wesley Prado (wesleyprado.dev@gmail.com)
  **/
 @IsTest
@@ -14,9 +14,7 @@ private class VehicleManufacturerControllerTest {
 		// Configura o mock para lançar uma exceção
 		serviceMock.setException(
 			'call',
-			new VehicleManufacturerClient.ManufacturerServiceException(
-				'Failed to retrieve manufacturers'
-			)
+			new CalloutException('Failed to retrieve manufacturers')
 		);
 
 		// Substitui o serviço padrão pelo mock
@@ -44,13 +42,8 @@ private class VehicleManufacturerControllerTest {
 		// Configura o mock para retornar um fabricante
 		serviceMock.setReturnValue(
 			'call',
-			new List<VehicleManufacturerClient.ManufacturerData>{
-				new VehicleManufacturerClient.ManufacturerData(
-					1,
-					'USA',
-					'Tesla Inc.',
-					'Tesla'
-				)
+			new List<ManufacturerDTO>{
+				new ManufacturerDTO(1, 'USA', 'Tesla Inc.', 'Tesla')
 			}
 		);
 
@@ -59,7 +52,7 @@ private class VehicleManufacturerControllerTest {
 		Test.startTest();
 		try {
 			// Chama o método que deverá retornar um fabricante
-			List<VehicleManufacturerClient.ManufacturerData> response = VehicleManufacturerController.getAllManufacturers();
+			List<ManufacturerDTO> response = VehicleManufacturerController.getAllManufacturers();
 
 			// Verifica se o fabricante retornado é o esperado
 			Assert.areEqual(1, response.size());
